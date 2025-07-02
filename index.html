@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elias Ansari - Data & Analytics Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            min-height: 100vh;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .profile h1 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .profile p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .nav {
+            list-style: none;
+            margin-bottom: auto;
+        }
+
+        .nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav button:hover, .nav button.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .content {
+            flex: 1;
+            padding: 3rem;
+            overflow-y: auto;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #f8fafc;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #475569;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card h3 {
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            color: #f8fafc;
+            border: 2px solid #64748b;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .chatbot {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 400px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #475569;
+            transform: scale(0.8) translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .chat-window.active {
+            display: flex;
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            max-width: 80%;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            margin-left: auto;
+            color: #f8fafc;
+        }
+
+        .message.bot {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #475569;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            margin-right: 0.5rem;
+            background: #334155;
+            color: #f8fafc;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .chat-input input::placeholder {
+            color: #94a3b8;
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+
+        .external-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: #f8fafc;
+            transition: all 0.3s ease;
+            border: 1px solid #64748b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .external-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .external-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .external-link:hover::before {
+            left: 100%;
+        }
+
+        .external-link-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .external-link:hover .external-link-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .technical-skills {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border-radius: 12px;
+            border: 1px solid #475569;
+        }
+
+        .technical-skills h3 {
+            color: #f8fafc;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category h4 {
+            color: #e2e8f0;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 0.5rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #475569;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-header h3 {
+            color: #f8fafc;
+            font-size: 1.5rem;
+            margin: 0;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .project-tag {
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .project-description p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            color: #e2e8f0;
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-metrics {
+            min-width: 280px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #334155;
+        }
+
+        .metric-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metric-content {
+            flex: 1;
+        }
+
+        .metric-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f8fafc;
+            line-height: 1;
+        }
+
+        .metric-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .metric-visual {
+            margin-top: 1rem;
+        }
+
+        .scale-visualization {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid #334155;
+        }
+
+        .scale-bar {
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scale-label {
+            color: white;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .time-savings-chart {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-header h4 {
+            color: #f8fafc;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .improvement-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .before-after {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .time-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .time-label {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .savings-visualization {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .savings-header h4 {
+            color: #f8fafc;
+            margin: 0 0 1.5rem 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .money-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .money-stack {
+            display: flex;
+            flex-direction: column;
+            width: 120px;
+        }
+
+        .savings-total {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 2px solid #475569;
+        }
+
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #10b981;
+            line-height: 1;
+        }
+
+        .total-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .nav {
+                display: flex;
+                gap: 0.5rem;
+                overflow-x: auto;
+            }
+            
+            .nav li {
+                margin-bottom: 0;
+                min-width: fit-content;
+            }
+            
+            .content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .chatbot {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .chat-window {
+                width: calc(100vw - 2rem);
+                right: -1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .project-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-metrics {
+                min-width: auto;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .project-header h3 {
+                font-size: 1.3rem;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile">
+                <div class="profile-img">E</div>
+                <h1>Elias</h1>
+                <p>Data & Analytics Professional</p>
+            </div>
+            
+            <ul class="nav">
+                <li><button class="nav-btn active" data-section="home">
+                    <span class="nav-icon">🏠</span> Home
+                </button></li>
+                <li><button class="nav-btn" data-section="projects">
+                    <span class="nav-icon">🚀</span> Projects
+                </button></li>
+                <li><button class="nav-btn" data-section="linkedin">
+                    <span class="nav-icon">💼</span> LinkedIn
+                </button></li>
+                <li><button class="nav-btn" data-section="blog">
+                    <span class="nav-icon">✍️</span> Blog
+                </button></li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <div class="section active" id="home">
+                <div class="hero">
+                    <h2>Product, Analytics & Data Engineer</h2>
+                    <p>Hi my name is Elias! I'm a seasoned data professional with a proven track record from startups to companies like Lockheed Martin and Amazon. My expertise is in building scalable analytics solutions where I transform complex data into actionable insights. I enjoy working cross-functionally with software, product, program, and science teams to drive impact at scale.</p>
+                </div>
+                
+                <div class="skills">
+                    <div class="skill-card">
+                        <h3>Data Engineering & Analytics</h3>
+                        <p>Expert in SQL, Python, AWS (Redshift, Athena, S3), Airflow, and DBT. Built and optimized data pipelines serving 1.5M+ employees worldwide, reducing runtime by 75% through strategic migrations and architectural improvements.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Dashboards & Visualizations</h3>
+                        <p>Advanced proficiency in Tableau, QuickSight, and data storytelling. Created executive-level dashboards incorporating NLP models that helped beat yearly CSAT goals by 10% and presented insights to senior leadership.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Gen AI & Machine Learning</h3>
+                        <p>Experience with LLMs, Gen AI, and Machine Learning libraries (i.e. scikit-learn) to automate AWS data pipelines providing $75k/year savings. Completed MS in Computer Science with AI focus.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Technical Leadership</h3>
+                        <p>Led cross-functional teams of 10+ engineers and data scientists through complex migrations and system rebuilds. Mentored teams on Tableau/Alteryx best practices and established knowledge-sharing platforms.</p>
+                    </div>
+                </div>
+
+                <div class="technical-skills">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming & Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Cloud & Data Platforms</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Redshift</span>
+                                <span class="skill-tag">Athena</span>
+                                <span class="skill-tag">S3</span>
+                                <span class="skill-tag">Airflow</span>
+                                <span class="skill-tag">Glue</span>
+                                <span class="skill-tag">Step Functions</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Analytics & Visualization</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Tableau</span>
+                                <span class="skill-tag">QuickSight</span>
+                                <span class="skill-tag">Data Visualization</span>
+                                <span class="skill-tag">Alteryx</span>
+                                <span class="skill-tag">Excel</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Data Science & ML</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Gen AI</span>
+                                <span class="skill-tag">LLM</span>
+                                <span class="skill-tag">Machine Learning</span>
+                                <span class="skill-tag">scikit-learn</span>
+                                <span class="skill-tag">pandas</span>
+                                <span class="skill-tag">NumPy</span>
+                                <span class="skill-tag">A/B Testing</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Data Engineering</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">PySpark</span>
+                                <span class="skill-tag">Hive</span>
+                                <span class="skill-tag">DBT</span>
+                                <span class="skill-tag">ETL</span>
+                                <span class="skill-tag">RDBMS</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero">
+                    <h2>Education</h2>
+                </div>
+                
+                <div class="skills">
+                    <div class="skill-card">
+                        <h3>MS in Computer Science</h3>
+                        <p>Georgia Institute of Technology • Focus: Artificial Intelligence • 4.0 GPA</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>BS in Neuroscience</h3>
+                        <p>The University of Texas at Austin • Minors: Computer Science & Business</p>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="mailto:eaansari10@gmail.com" class="btn btn-primary">
+                        📧 Get in Touch
+                    </a>
+                </div>
+            </div>
+            
+            <div class="section" id="projects">
+                <div class="hero">
+                    <h2>Key Projects</h2>
+                    <p>Showcasing impactful data engineering and analytics projects that delivered measurable business value.</p>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Shout-Outs Internal Recognition Tool</h3>
+                        <span class="project-tag">Amazon • 2024</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            <p>Independently owned, expanded, and launched comprehensive reporting infrastructure for Amazon's internal recognition platform from product inception to worldwide deployment.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">AWS Redshift</span>
+                                <span class="tech-tag">Airflow</span>
+                                <span class="tech-tag">Tableau</span>
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric-card">
+                                <div class="metric-icon">👥</div>
+                                <div class="metric-content">
+                                    <div class="metric-number">1.5M+</div>
+                                    <div class="metric-label">Employees Served</div>
+                                </div>
+                            </div>
+                            <div class="metric-visual">
+                                <div class="scale-visualization">
+                                    <div class="scale-bar" style="width: 100%; background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);">
+                                        <span class="scale-label">Global Scale Deployment</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Data Pipeline Migration & Optimization</h3>
+                        <span class="project-tag">Amazon • 2024</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            <p>Migrated critical reporting pipelines from legacy DataNet system to modern Airflow infrastructure, dramatically improving performance for VP-level dashboards.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Apache Airflow</span>
+                                <span class="tech-tag">AWS Redshift</span>
+                                <span class="tech-tag">DataNet</span>
+                                <span class="tech-tag">ETL</span>
+                                <span class="tech-tag">Pipeline Optimization</span>
+                            </div>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="time-savings-chart">
+                                <div class="chart-header">
+                                    <h4>Performance Improvement</h4>
+                                    <div class="improvement-badge">75% Faster</div>
+                                </div>
+                                <div class="before-after">
+                                    <div class="time-bar before">
+                                        <div class="time-label">Before (DataNet)</div>
+                                        <div class="time-visual" style="width: 100%; height: 40px; background: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                            100% Runtime
+                                        </div>
+                                    </div>
+                                    <div class="time-bar after">
+                                        <div class="time-label">After (Airflow)</div>
+                                        <div class="time-visual" style="width: 25%; height: 40px; background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                            25% Runtime
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>AI-Powered Data Pipeline Automation</h3>
+                        <span class="project-tag">Amazon • 2024</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            <p>Implemented Large Language Models and Generative AI solutions to automate complex AWS data pipeline processes, eliminating manual intervention and reducing operational costs.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">LLMs</span>
+                                <span class="tech-tag">Gen AI</span>
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                            </div>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="savings-visualization">
+                                <div class="savings-header">
+                                    <h4>Annual Cost Savings</h4>
+                                </div>
+                                <div class="money-chart">
+                                    <div class="money-stack">
+                                        <div class="money-bill" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); height: 60px; margin-bottom: 4px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                            $25k
+                                        </div>
+                                        <div class="money-bill" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); height: 60px; margin-bottom: 4px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                            $25k
+                                        </div>
+                                        <div class="money-bill" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); height: 60px; margin-bottom: 4px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+                                            $25k
+                                        </div>
+                                    </div>
+                                    <div class="savings-total">
+                                        <div class="total-amount">$75,000</div>
+                                        <div class="total-label">Annual Savings</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section" id="linkedin">
+                <div class="hero">
+                    <h2>Professional Network</h2>
+                    <p>Connect with me on LinkedIn to see my professional journey, recommendations, and latest career updates.</p>
+                </div>
+                
+                <a href="https://www.linkedin.com/in/eliasansari/" target="_blank" class="external-link">
+                    <div class="external-link-icon">💼</div>
+                    <div>
+                        <h3>LinkedIn Profile</h3>
+                        <p>View my professional experience, skills, and recommendations from colleagues and clients.</p>
+                    </div>
+                </a>
+                
+                <div class="skill-card">
+                    <h3>Why Connect?</h3>
+                    <p>My LinkedIn profile showcases my professional journey, includes recommendations from colleagues and supervisors, and features regular updates about projects I'm working on and technologies I'm exploring. It's the best place to get a comprehensive view of my professional background and connect for potential opportunities.</p>
+                </div>
+            </div>
+            
+            <div class="section" id="blog">
+                <div class="hero">
+                    <h2>Technical Blog</h2>
+                    <p>I'm just starting my technical blog where I'll share insights, tutorials, and thoughts on software development, emerging technologies, and problem-solving approaches.</p>
+                </div>
+                
+                <a href="https://binsightful.beehiiv.com" target="_blank" class="external-link">
+                    <div class="external-link-icon">✍️</div>
+                    <div>
+                        <h3>Visit My Blog - BINSIGHTFUL</h3>
+                        <p>Read my latest posts about product, data, AI, and evolving technology trends.</p>
+                    </div>
+                </a>
+                
+                <div class="skills">
+                    <div class="skill-card">
+                        <h3>Upcoming Topics</h3>
+                        <p>I plan to write about product, analytics, engineering, and AI topics. I will also create one-pager analyses on various subjects around emerging AI technologies.</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Stay Updated</h3>
+                        <p>Follow my blog for regular updates on my learning journey in how AI is driving impact the world of analytics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chatbot">
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                Ask about Elias
+                <button class="chat-close" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    Hi! I'm here to answer questions about Elias's skills and experience. Try asking something like "Does Elias know Python?" or "What's Elias's experience with Tableau?"
+                </div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator">Elias is typing...</div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask about my skills..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and sections
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = btn.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+
+        // Chatbot functionality
+        let chatOpen = false;
+        
+        // Knowledge base about Elias
+        const knowledge = {
+            python: "Yes, Elias has extensive Python experience including pandas, NumPy, scikit-learn, and PySpark. He uses Python daily in his role at Amazon for data engineering and machine learning applications.",
+            sql: "Yes, Elias is highly proficient in SQL and uses it extensively with AWS Redshift, Athena, and other database systems in his current role as a Business Intelligence Engineer at Amazon.",
+            aws: "Yes, Elias has strong AWS expertise including Redshift, Athena, S3, Airflow, Glue, and Step Functions. He migrated reporting pipelines to AWS services and reduced runtime by 75%.",
+            tableau: "Yes, Elias is an expert in Tableau with years of experience. He created executive-level dashboards, served as a Subject Matter Expert, and presented insights to senior leadership that helped beat CSAT goals by 10%.",
+            amazon: "Yes, Elias currently works at Amazon as a Business Intelligence Engineer II since April 2024. He independently owned and launched reporting for Shout-Outs tool serving 1.5M+ employees worldwide.",
+            experience: "Elias has 6+ years of experience in data engineering and analytics, currently at Amazon as BI Engineer II. Previously worked at Lockheed Martin as Senior Data Analyst and CS Disco as Software Engineer.",
+            education: "Elias has completed a MS in Computer Science at Georgia Institute of Technology with a focus on Artificial Intelligence (4.0 GPA). He has a BS from UT Austin in Neuroscience with CS and Business minors.",
+            leadership: "Yes, Elias has significant leadership experience. He led teams of 10+ Data Engineers, Business Intelligence Engineers, and Data Scientists for complex migration projects and established knowledge-sharing platforms.",
+            machinelearning: "Yes, Elias has machine learning experience with scikit-learn, A/B testing, and NLP models. He completed his MS in Computer Science with AI focus and has applied ML to improve search algorithms.",
+            airflow: "Yes, Elias has hands-on experience with Apache Airflow. He migrated reporting pipelines from DataNet to Airflow, achieving a 75% reduction in runtime for daily jobs feeding VP-level dashboards.",
+            skills: "Elias's technical skills include SQL, Python, AWS (Redshift, Athena, S3), Tableau, QuickSight, Airflow, DBT, PySpark, scikit-learn, pandas, NumPy, A/B Testing, ETL, and Machine Learning.",
+            projects: "Elias led the Shout-Outs reporting launch for 1.5M+ employees, created CSAT dashboards with NLP integration, migrated complex data pipelines, and automated reporting processes saving 15-20% in manual effort.",
+            databases: "Yes, Elias has extensive database experience with AWS Redshift, Athena, and various RDBMS systems. He's worked with data warehouses and built ETL pipelines for enterprise-scale applications.",
+            dataengineering: "Yes, Elias specializes in data engineering with expertise in ETL processes, data pipelines, AWS services, Airflow orchestration, and DBT for data transformation.",
+            visualization: "Yes, Elias is expert in data visualization using Tableau and AWS QuickSight. He's created executive dashboards and served as a SME, training others in visualization best practices.",
+            tableau: "Yes, Elias is an expert in Tableau with years of experience. He created executive-level dashboards, served as a Subject Matter Expert, and presented insights to senior leadership that helped beat CSAT goals by 10%.",
+            javascript: "Yes, Elias has JavaScript experience from his software engineering background and uses it for creating interactive dashboards and data visualization components."
+        };
+
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active', chatOpen);
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.classList.add('active');
+
+            // Simple AI response logic
+            setTimeout(() => {
+                typingIndicator.classList.remove('active');
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+            }, Math.random() * 1000 + 500); // Random delay between 0.5-1.5 seconds
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateResponse(question) {
+            const q = question.toLowerCase();
+            
+            // Check for specific technologies/skills
+            for (const [key, value] of Object.entries(knowledge)) {
+                if (q.includes(key)) {
+                    return value;
+                }
+            }
+            
+            // General responses
+            if (q.includes('experience') || q.includes('background')) {
+                return knowledge.experience;
+            }
+            
+            if (q.includes('skill')) {
+                return knowledge.skills;
+            }
+            
+            if (q.includes('contact') || q.includes('reach') || q.includes('email')) {
+                return "You can reach Elias at eaansari10@gmail.com or through the contact button on the homepage. He's also active on LinkedIn!";
+            }
+            
+            if (q.includes('resume') || q.includes('cv')) {
+                return "You can download Elias's resume using the button on the homepage for detailed information about his experience and qualifications.";
+            }
+            
+            if (q.includes('hello') || q.includes('hi')) {
+                return "Hello! I'm here to answer questions about Elias's professional background and skills. What would you like to know?";
+            }
+            
+            if (q.includes('github') || q.includes('code') || q.includes('portfolio')) {
+                return "You can find Elias's work examples through his LinkedIn profile and blog. For specific project code or GitHub repositories, feel free to reach out to him directly!";
+            }
+            
+            // Default response
+            return "I can help answer questions about Elias's skills in Python, SQL, AWS, Tableau, Machine Learning, his experience at Amazon and Lockheed Martin, and his educational background. What specific area would you like to know about?";
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Close chat when clicking outside
+        document.addEventListener('click', (e) => {
+            const chatbot = document.querySelector('.chatbot');
+            if (chatOpen && !chatbot.contains(e.target)) {
+                toggleChat();
+            }
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add staggered animation to skill cards
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
