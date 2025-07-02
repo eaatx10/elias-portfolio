@@ -769,11 +769,52 @@
                 display: flex;
                 gap: 0.5rem;
                 overflow-x: auto;
+                padding-bottom: 0.5rem;
+                /* ENHANCED MOBILE NAVIGATION */
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                position: relative;
+                padding-right: 20px;
+            }
+
+            /* Fade effect to indicate scrollable content */
+            .nav::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: calc(100% - 0.5rem);
+                width: 20px;
+                background: linear-gradient(to left, #1e293b, transparent);
+                pointer-events: none;
+                border-radius: 0 8px 8px 0;
+            }
+
+            /* Improved scrollbar styling */
+            .nav::-webkit-scrollbar {
+                height: 3px;
+            }
+
+            .nav::-webkit-scrollbar-track {
+                background: #334155;
+                border-radius: 2px;
+            }
+
+            .nav::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+                border-radius: 2px;
             }
             
             .nav li {
                 margin-bottom: 0;
                 min-width: fit-content;
+                flex-shrink: 0; /* Prevent compression */
+            }
+
+            .nav button {
+                white-space: nowrap; /* Prevent text wrapping */
+                min-width: 90px; /* Consistent button sizes */
+                padding: 0.75rem 1.2rem; /* Slightly larger touch targets */
             }
             
             .content {
