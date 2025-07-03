@@ -55,6 +55,17 @@
             font-weight: bold;
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
             transition: transform 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            padding: 3px; /* Add padding to show gradient border */
+        }
+
+        .profile-img img {
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            object-fit: cover;
+            border-radius: 50%;
+            background: #1e293b; /* Fallback background */
         }
 
         .profile-img:hover {
@@ -820,7 +831,9 @@
     <div class="container">
         <div class="sidebar">
             <div class="profile">
-                <div class="profile-img">E</div>
+                <div class="profile-img">
+                    <img src="ea-profile.jpg" alt="Elias Profile Picture">
+                </div>
                 <h1>Elias</h1>
                 <p>Data & Analytics Professional</p>
             </div>
@@ -1142,6 +1155,67 @@
     </div>
 
     <script>
+        // Load profile image from GitHub or uploaded file
+        async function loadProfileImage() {
+            // Check if there's already an img element in the profile
+            const existingImg = document.querySelector('.profile-img img');
+            if (existingImg) {
+                console.log('Profile image already exists, skipping auto-load');
+                return; // Don't override manually added images
+            }
+            
+            try {
+                // First try to load from uploaded file
+                let imageData, imageType = 'image/jpeg';
+                
+                try {
+                    imageData = await window.fs.readFile('profile.jpg');
+                    imageType = 'image/jpeg';
+                } catch (e) {
+                    // If profile.jpg not found, try other common names
+                    try {
+                        imageData = await window.fs.readFile('ea-profile.jpg');
+                        imageType = 'image/jpeg';
+                    } catch (e2) {
+                        try {
+                            imageData = await window.fs.readFile('image.png');
+                            imageType = 'image/png';
+                        } catch (e3) {
+                            throw new Error('No profile image found');
+                        }
+                    }
+                }
+                
+                // Create a blob from the image data
+                const blob = new Blob([imageData], { type: imageType });
+                const imageUrl = URL.createObjectURL(blob);
+                
+                // Create an img element and add it to the profile
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = 'Elias Ansari';
+                img.onload = function() {
+                    console.log('Profile image loaded successfully');
+                };
+                img.onerror = function() {
+                    console.log('Error loading profile image');
+                };
+                
+                // Replace the profile content
+                const profileImg = document.querySelector('.profile-img');
+                profileImg.innerHTML = '';
+                profileImg.appendChild(img);
+                
+            } catch (error) {
+                console.log('Could not load profile image, keeping default "E"');
+                // Keep the default "E" if image loading fails and no manual image exists
+                const profileImg = document.querySelector('.profile-img');
+                if (profileImg.innerHTML === '' || profileImg.textContent.trim() === '') {
+                    profileImg.textContent = 'E';
+                }
+            }
+        }
+
         // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1272,6 +1346,9 @@
 
         // Add some interactive effects
         document.addEventListener('DOMContentLoaded', () => {
+            // Load the profile image
+            loadProfileImage();
+            
             // Add staggered animation to skill cards
             const skillCards = document.querySelectorAll('.skill-card');
             skillCards.forEach((card, index) => {
