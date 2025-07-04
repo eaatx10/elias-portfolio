@@ -160,11 +160,128 @@
             animation: pulse 3s ease-in-out infinite;
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            color: #cbd5e1;
+        .hero-content {
+            display: block;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text {
             max-width: 600px;
             margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin: 0;
+        }
+
+        .hero-companies {
+            width: 100%;
+        }
+
+        .companies-header {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .companies-header h3 {
+            color: #e2e8f0;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .companies-header p {
+            color: #94a3b8;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .company-item {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid #475569;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .company-item:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+        }
+
+        .company-item:hover::before {
+            left: 100%;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 30px;
+            object-fit: contain;
+            margin: 0 auto 0.5rem;
+            display: block;
+            filter: brightness(0.9);
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            padding: 2px;
+            background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
+        }
+
+        .company-logo-inner {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #334155;
+            padding: 4px;
+        }
+
+        .company-item:hover .company-logo {
+            filter: brightness(1.1);
+            transform: scale(1.05);
+        }
+
+        .company-item:hover .company-logo-inner {
+            filter: brightness(1.1);
+        }
+
+        .company-info h4 {
+            color: #f8fafc;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .company-info .duration {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .skills {
@@ -805,6 +922,41 @@
                 font-size: 2rem;
             }
 
+            .hero-content {
+                display: block;
+            }
+
+            .hero-text {
+                margin-bottom: 1.5rem;
+            }
+
+            .companies-header {
+                text-align: left;
+            }
+
+            .companies-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+                max-width: none;
+            }
+
+            .company-item {
+                padding: 0.75rem;
+            }
+
+            .company-logo {
+                width: 50px;
+                height: 25px;
+            }
+
+            .company-info h4 {
+                font-size: 0.8rem;
+            }
+
+            .company-info .duration {
+                font-size: 0.7rem;
+            }
+
             .project-content {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -858,7 +1010,46 @@
             <div class="section active" id="home">
                 <div class="hero">
                     <h2>Product, Analytics & Data Engineer</h2>
-                    <p>Hi my name is Elias! I'm a seasoned data professional with a proven track record from startups to companies like Lockheed Martin and Amazon. My expertise is in building scalable analytics solutions where I transform complex data into actionable insights. I enjoy working cross-functionally with software, product, program, and science teams to drive impact at scale.</p>
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <p>Hi my name is Elias! I'm a seasoned data professional with a proven track record from startups to companies like Lockheed Martin and Amazon. My expertise is in building scalable analytics solutions where I transform complex data into actionable insights. I enjoy working cross-functionally with software, product, program, and science teams to drive impact at scale.</p>
+                        </div>
+                        <div class="hero-companies">
+                            <div class="companies-header">
+                                <h3>Career Journey</h3>
+                                <p>Driving impact at scale across industries</p>
+                            </div>
+                            <div class="companies-grid">
+                                <div class="company-item">
+                                    <div class="company-logo">
+                                        <img src="disco_logo.jpg" alt="CS Disco" class="company-logo-inner">
+                                    </div>
+                                    <div class="company-info">
+                                        <h4>Software Engineer</h4>
+                                        <p class="duration">2017 - 2019</p>
+                                    </div>
+                                </div>
+                                <div class="company-item">
+                                    <div class="company-logo">
+                                        <img src="lockheed_logo.jpg" alt="Lockheed Martin" class="company-logo-inner">
+                                    </div>
+                                    <div class="company-info">
+                                        <h4>Data</h4>
+                                        <p class="duration">2019 - 2022</p>
+                                    </div>
+                                </div>
+                                <div class="company-item">
+                                    <div class="company-logo">
+                                        <img src="amazon_logo.jpg" alt="Amazon" class="company-logo-inner">
+                                    </div>
+                                    <div class="company-info">
+                                        <h4>Business Intelligence</h4>
+                                        <p class="duration">2022 - Present</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="skills">
