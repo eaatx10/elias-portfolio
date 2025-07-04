@@ -248,8 +248,11 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
-            white-space: nowrap;
             margin-bottom: 0.5rem;
+            max-width: 100%;
+            text-align: center;
+            line-height: 1.2;
+            word-wrap: break-word;
         }
 
         .company-info h4 {
@@ -926,12 +929,16 @@
             }
 
             .company-item {
-                padding: 0.75rem;
+                padding: 0.75rem 0.5rem;
+                min-height: 70px;
             }
 
-            .company-logo {
-                width: 50px;
-                height: 25px;
+            .company-pill {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.6rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+                hyphens: auto;
             }
 
             .company-info h4 {
