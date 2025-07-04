@@ -214,6 +214,11 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
         }
 
         .company-item::before {
@@ -236,35 +241,15 @@
             left: 100%;
         }
 
-        .company-logo {
-            width: 60px;
-            height: 30px;
-            object-fit: contain;
-            margin: 0 auto 0.5rem;
-            display: block;
-            filter: brightness(0.9);
-            transition: all 0.3s ease;
-            border-radius: 6px;
-            padding: 2px;
+        .company-pill {
             background: linear-gradient(135deg, #3b82f6 0%, #f97316 100%);
-        }
-
-        .company-logo-inner {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 4px;
-            background: #334155;
-            padding: 4px;
-        }
-
-        .company-item:hover .company-logo {
-            filter: brightness(1.1);
-            transform: scale(1.05);
-        }
-
-        .company-item:hover .company-logo-inner {
-            filter: brightness(1.1);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-bottom: 0.5rem;
         }
 
         .company-info h4 {
@@ -1021,27 +1006,21 @@
                             </div>
                             <div class="companies-grid">
                                 <div class="company-item">
-                                    <div class="company-logo">
-                                        <img src="disco_logo.jpg" alt="CS Disco" class="company-logo-inner">
-                                    </div>
+                                    <span class="company-pill">CS DISCO</span>
                                     <div class="company-info">
                                         <h4>Software Engineer</h4>
                                         <p class="duration">2017 - 2019</p>
                                     </div>
                                 </div>
                                 <div class="company-item">
-                                    <div class="company-logo">
-                                        <img src="lockheed_logo.jpg" alt="Lockheed Martin" class="company-logo-inner">
-                                    </div>
+                                    <span class="company-pill">Lockheed Martin</span>
                                     <div class="company-info">
                                         <h4>Data</h4>
                                         <p class="duration">2019 - 2022</p>
                                     </div>
                                 </div>
                                 <div class="company-item">
-                                    <div class="company-logo">
-                                        <img src="amazon_logo.jpg" alt="Amazon" class="company-logo-inner">
-                                    </div>
+                                    <span class="company-pill">Amazon</span>
                                     <div class="company-info">
                                         <h4>Business Intelligence</h4>
                                         <p class="duration">2022 - Present</p>
